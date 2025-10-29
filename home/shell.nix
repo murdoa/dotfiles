@@ -2,7 +2,8 @@
   lib,
   pkgs,
   ...
-}: {
+}:
+{
 
   home.packages = [
     pkgs.zsh
@@ -10,12 +11,12 @@
   ];
 
   programs.zsh = {
-      enable = true;
+    enable = true;
   };
 
   programs.zsh.oh-my-zsh = {
-	enable = true;
-	plugins = [];
-	theme = "agnoster";
+    enable = true;
+    plugins = [ ];
+    theme = "agnoster";
   };
 }
