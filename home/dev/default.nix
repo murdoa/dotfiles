@@ -4,5 +4,8 @@
   ...
 }:
 {
-  imports = [ ./vscode.nix ];
+  imports = [
+    ./ai.nix
+    ./vscode.nix
+  ];
 }
