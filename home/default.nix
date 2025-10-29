@@ -5,7 +5,8 @@
 }:
 {
   imports = [
-    ./shell.nix
     ./dev
+    ./music.nix
+    ./shell.nix
   ];
 }
