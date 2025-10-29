@@ -37,7 +37,7 @@ in
         powerManagement.enable = true; # Disable if issues with sleep/suspend
         package = nvidiaPackage;
         nvidiaSettings = true;
-        open = true;
+        open = false;
       };
       opengl.enable = true;
       graphics = {

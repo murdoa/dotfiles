@@ -115,6 +115,7 @@
     git
     wget
     nixfmt-rfc-style
+    bottles
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
