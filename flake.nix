@@ -3,15 +3,33 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
-  };
-
-  outputs = { self, nixpkgs, ... }@inputs: {
-    # nixos referres to hostname
-    nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
-      modules = [
-        # Import the previous configuration.nix
-        ./configuration.nix
-      ];
+    home-manager = {
+      # Follow corresponding `release` branch from Home Manager
+      url = "github:nix-community/home-manager/release-25.05";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
   };
+
+  outputs = { self, nixpkgs, home-manager,  ... }@inputs:
+    let 
+        lib = nixpkgs.lib;
+        system = "x86_64-linux";
+        pkgs = nixpkgs.legacyPackages.${system};
+    in  {
+        # nixos referres to hostname
+        nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
+          inherit system;
+          modules = [
+               # Import the previous configuration.nix
+               ./configuration.nix
+          ];
+        };
+
+        homeConfigurations = {
+            aodhan = home-manager.lib.homeManagerConfiguration {
+                inherit pkgs;
+                modules = [ ./home.nix ];
+            };
+        };
+    };
 }
