@@ -1,10 +1,18 @@
-{ lib, pkgs, config, ... }:
+{
+  lib,
+  pkgs,
+  config,
+  ...
+}:
 with lib;
 let
   cfg = config.arroquw.nvidia;
   nvidiaPackage = config.boot.kernelPackages.nvidiaPackages.latest;
-in {
-  options.arroquw.nvidia = { enable = mkEnableOption "nvidia drivers"; };
+in
+{
+  options.arroquw.nvidia = {
+    enable = mkEnableOption "nvidia drivers";
+  };
 
   config = mkIf cfg.enable {
     nixpkgs.config.nvidia.acceptLicense = true;
