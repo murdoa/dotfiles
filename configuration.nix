@@ -137,4 +137,8 @@
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "25.05"; # Did you read the comment?
 
+  # Setup zsh
+  environment.shells = with pkgs; [zsh];
+  users.defaultUserShell = pkgs.zsh;
+  programs.zsh.enable = true;
 }
