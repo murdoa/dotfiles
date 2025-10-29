@@ -116,6 +116,7 @@
     wget
     nixfmt-rfc-style
     bottles
+    wireguard-tools 
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
