@@ -5,6 +5,7 @@
 }:
 {
   imports = [
+    ./hyprland.nix
   ];
 
   fonts.fontconfig.enable = true;
