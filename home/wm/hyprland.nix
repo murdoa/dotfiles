@@ -6,7 +6,7 @@
 let
   terminal = "kitty";
   fileManager = "nautilus";
-  menu = "wofi --show drun";
+  menu = "walker";
 in
 {
   wayland.windowManager.hyprland = {
@@ -30,6 +30,7 @@ in
       monitor = ",preferred,auto,auto";
 
       exec-once = [
+        "elephant"
         "waybar"
       ];
 
