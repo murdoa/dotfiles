@@ -6,6 +6,7 @@
 {
   imports = [
     ./hyprland.nix
+    ./waybar
   ];
 
   fonts.fontconfig.enable = true;
@@ -33,10 +34,6 @@
     enable = true;
     platformTheme.name = "adwaita";
     style.name = "adwaita-dark";
-  };
-
-  programs.waybar = {
-    enable = true;
   };
 
   programs.walker = {
