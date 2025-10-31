@@ -8,6 +8,7 @@
     ./dev
     ./music.nix
     ./shell.nix
+    ./web
     ./wm
   ];
 }

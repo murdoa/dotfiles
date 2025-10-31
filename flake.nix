@@ -16,6 +16,11 @@
     };
 
     nix-vscode-extensions.url = "github:nix-community/nix-vscode-extensions";
+
+    firefox-addons = {
+      url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -46,7 +51,7 @@
         aodhan = home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
           modules = [ ./home.nix ];
-          extraSpecialArgs = { inherit inputs; };
+          extraSpecialArgs = { inherit inputs; inherit system; };
         };
       };
     };
