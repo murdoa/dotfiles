@@ -6,11 +6,11 @@
 }:
 with lib;
 let
-  cfg = config.arroquw.nvidia;
+  cfg = config.hardware.nvidia;
   nvidiaPackage = config.boot.kernelPackages.nvidiaPackages.latest;
 in
 {
-  options.arroquw.nvidia = {
+  options.hardware.nvidia = {
     enable = mkEnableOption "nvidia drivers";
   };
 
