@@ -41,6 +41,18 @@
     ];
   };
 
+  fileSystems."/mnt/ryzen" = {
+    device = "/dev/disk/by-uuid/d1d58fca-d5d0-4c7e-ba95-ebd8cc3e12fe";
+    fsType = "auto";
+    options = [ "nosuid" "nodev" "nofail" "x-gvfs-show"];
+  };
+  
+  fileSystems."/mnt/build" = {
+    device = "/dev/disk/by-uuid/389102b2-268d-4ad9-872c-f2cb332641af";
+    fsType = "auto";
+    options = [ "nosuid" "nodev" "nofail" "x-gvfs-show"];
+  };
+
   swapDevices = [
     { device = "/dev/disk/by-uuid/264740ac-b67e-4222-ac98-d5c9363e0730"; }
   ];
