@@ -50,10 +50,10 @@
         };
 
         "group/group-power" = {
-          orientation = "inherit";
+          orientation = "horizontal";
           drawer = {
             transition-duration = 500;
-            children-class = "not-power";
+            children-class = "launcher";
             transition-left-to-right = false;
           };
           modules = [
