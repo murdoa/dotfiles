@@ -22,7 +22,7 @@ in
     };
 
     settings = {
-      
+
       "$terminal" = terminal;
       "$fileManager" = fileManager;
       "$menu" = menu;
@@ -218,11 +218,11 @@ in
       ];
 
       bindl = [
-          # Requires playerctl
-          ", XF86AudioNext, exec, playerctl next"
-          ", XF86AudioPause, exec, playerctl play-pause"
-          ", XF86AudioPlay, exec, playerctl play-pause"
-          ", XF86AudioPrev, exec, playerctl previous"
+        # Requires playerctl
+        ", XF86AudioNext, exec, playerctl next"
+        ", XF86AudioPause, exec, playerctl play-pause"
+        ", XF86AudioPlay, exec, playerctl play-pause"
+        ", XF86AudioPrev, exec, playerctl previous"
       ];
 
       windowrule = [
