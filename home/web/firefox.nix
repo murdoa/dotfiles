@@ -130,6 +130,10 @@
           "bookmarks"
         ];
 
+        # Enable DRM
+        "browser.eme.ui.enabled" = true;
+        "media.eme.enabled" = true;
+
         # Layout
         "browser.uiCustomization.state" = builtins.toJSON {
           placements = {
