@@ -104,8 +104,9 @@
     git
     wget
     nixfmt-rfc-style
-    bottles
     wireguard-tools
+    zip
+    unzip
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -126,6 +127,11 @@
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
+
+  networking.extraHosts = 
+    ''
+      0.0.0.0 apresolve.spotify.com
+    '';
 
   # Enable NVIDIA drivers
   hardware.nvidia.enable = true;
