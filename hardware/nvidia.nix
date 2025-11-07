@@ -26,6 +26,7 @@ in
     };
 
     environment.systemPackages = with pkgs; [
+      pciutils
       vulkan-loader
       vulkan-validation-layers
       vulkan-tools
@@ -39,7 +40,6 @@ in
         nvidiaSettings = true;
         open = false;
       };
-      opengl.enable = true;
       graphics = {
         enable = true;
         #driSupport = true;
