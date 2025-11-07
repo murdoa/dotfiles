@@ -36,6 +36,13 @@
     style.name = "adwaita-dark";
   };
 
+  dconf.settings = {
+    "org/gnome/desktop/interface" = {
+      gtk-theme = "Adwaita-dark";
+      color-scheme = "prefer-dark";
+    };
+  };
+
   programs.walker = {
     enable = true;
   };
