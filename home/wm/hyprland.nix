@@ -186,6 +186,19 @@ in
         "$mainMod SHIFT, up, movewindow, u"
         "$mainMod SHIFT, down, movewindow, d"
 
+        # Resize windows with keyboard
+        "$mainMod CTRL, left, resizeactive, -20 0"
+        "$mainMod CTRL, right, resizeactive, 20 0"
+        "$mainMod CTRL, up, resizeactive, 0 -20"
+        "$mainMod CTRL, down, resizeactive, 0 20"
+
+        # Fullscreen toggle
+        "$mainMod, F, fullscreen, 0"
+
+        # Cycle through windows
+        "ALT, Tab, cyclenext"
+        "ALT SHIFT, Tab, cyclenext, prev"
+
         # Move active window to a workspace with mainMod + SHIFT + [0-9]
         "$mainMod SHIFT, 1, movetoworkspace, 1"
         "$mainMod SHIFT, 2, movetoworkspace, 2"
