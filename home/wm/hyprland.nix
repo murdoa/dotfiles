@@ -161,6 +161,12 @@ in
         "$mainMod, R, exec, $menu"
         "$mainMod, P, pseudo, # dwindle"
         "$mainMod, J, togglesplit, # dwindle"
+        # Swap windows and master
+        "$mainMod SHIFT, J, layoutmsg, swapwithmaster"
+        "$mainMod, T, layoutmsg, swapsplit"
+
+        # Pin floating window
+        "$mainMod, G, exec, hyprctl dispatch pin"
 
         # Move focus with mainMod + arrow keys
         "$mainMod, left, movefocus, l"
@@ -247,7 +253,9 @@ in
       windowrule = [
         "suppressevent maximize, class:.*"
         "nofocus,class:^$,title:^$,xwayland:1,floating:1,fullscreen:0,pinned:0"
-        "bordersize 0, floating:1" # Disable borders on floating windows
+        "bordersize 0,floating:1,pinned:0" # Disable borders on floating windows
+        "bordercolor rgba(ff0000ff) rgba(ff0000ff), pinned:1" # Red border for pinned windows (active and inactive)
+        "bordersize 2,focus:0,floating:1,pinned:1"
       ];
 
       xwayland = {

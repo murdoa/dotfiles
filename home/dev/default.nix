@@ -8,6 +8,7 @@
     ./ai.nix
     ./reverse.nix
     ./python.nix
+    ./tmux.nix
     ./vscode.nix
   ];
 }

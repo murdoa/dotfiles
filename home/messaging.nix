@@ -6,7 +6,7 @@
 {
 
   home.packages = [
-    pkgs.libreoffice
+    pkgs.cinny-desktop
   ];
-  
+
 }
