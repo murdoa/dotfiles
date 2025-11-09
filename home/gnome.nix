@@ -4,21 +4,6 @@
   ...
 }:
 {
-
-  home.packages = [
-    pkgs.libreoffice
-  ];
-
-  xdg.mimeApps = {
-    enable = true;
-    associations.added = {
-      "application/pdf" = [ "org.gnome.Evince.desktop" ];
-    };
-    defaultApplications = {
-      "application/pdf" = [ "org.gnome.Evince.desktop" ];
-    };
-  };
-  
   dconf.settings = {
     "org/gnome/nautilus/preferences" = {
       default-folder-viewer = "icon-view";
