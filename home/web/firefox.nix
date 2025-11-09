@@ -36,6 +36,7 @@
       extensions.packages = with inputs.firefox-addons.packages.${system}; [
         ublock-origin
         user-agent-string-switcher
+        proton-pass
       ];
       bookmarks = { };
       settings = {
@@ -64,7 +65,7 @@
         "browser.bookmarks.addedImportButton" = true;
 
         # Don't ask for download dir
-        "browser.download.useDownloadDir" = false;
+        "browser.download.useDownloadDir" = true;
 
         # Disable crappy home activity stream page
         "browser.newtabpage.activity-stream.feeds.section.topstories" = false;
@@ -130,52 +131,55 @@
           "bookmarks"
         ];
 
+        # Enabled Unified Extensions
+        extensions.unifiedExtensions.enable = true;
+
         # Enable DRM
         "browser.eme.ui.enabled" = true;
         "media.eme.enabled" = true;
 
         # Layout
-        "browser.uiCustomization.state" = builtins.toJSON {
-          placements = {
-            unified-extensions-area = [ ];
-            widget-overflow-fixed-list = [ ];
-            nav-bar = [
-              "back-button"
-              "forward-button"
-              "vertical-spacer"
-              "stop-reload-button"
-              "urlbar-container"
-              "downloads-button"
-              "ublock0_raymondhill_net-browser-action"
-              "_a6c4a591-f1b2-4f03-b3ff-767e5bedf4e7_-browser-action"
-              "_testpilot-containers-browser-action"
-              "reset-pbm-toolbar-button"
-              "unified-extensions-button"
-            ];
-            toolbar-menubar = [ "menubar-items" ];
-            TabsToolbar = [ ];
-            vertical-tabs = [ "tabbrowser-tabs" ];
-            PersonalToolbar = [ "personal-bookmarks" ];
-          };
-          seen = [
-            "save-to-pocket-button"
-            "developer-button"
-            "ublock0_raymondhill_net-browser-action"
-            "_a6c4a591-f1b2-4f03-b3ff-767e5bedf4e7_-browser-action"
-            "_testpilot-containers-browser-action"
-            "screenshot-button"
-          ];
-          dirtyAreaCache = [
-            "nav-bar"
-            "PersonalToolbar"
-            "toolbar-menubar"
-            "TabsToolbar"
-            "widget-overflow-fixed-list"
-            "vertical-tabs"
-          ];
-          currentVersion = 23;
-          newElementCount = 10;
-        };
+        # "browser.uiCustomization.state" = builtins.toJSON {
+        #   placements = {
+        #     unified-extensions-area = [ ];
+        #     widget-overflow-fixed-list = [ ];
+        #     nav-bar = [
+        #       "back-button"
+        #       "forward-button"
+        #       "vertical-spacer"
+        #       "stop-reload-button"
+        #       "urlbar-container"
+        #       "downloads-button"
+        #       "ublock0_raymondhill_net-browser-action"
+        #       "_a6c4a591-f1b2-4f03-b3ff-767e5bedf4e7_-browser-action"
+        #       "_testpilot-containers-browser-action"
+        #       "reset-pbm-toolbar-button"
+        #       "unified-extensions-button"
+        #     ];
+        #     toolbar-menubar = [ "menubar-items" ];
+        #     TabsToolbar = [ ];
+        #     vertical-tabs = [ "tabbrowser-tabs" ];
+        #     PersonalToolbar = [ "personal-bookmarks" ];
+        #   };
+        #   seen = [
+        #     "save-to-pocket-button"
+        #     "developer-button"
+        #     "ublock0_raymondhill_net-browser-action"
+        #     "_a6c4a591-f1b2-4f03-b3ff-767e5bedf4e7_-browser-action"
+        #     "_testpilot-containers-browser-action"
+        #     "screenshot-button"
+        #   ];
+        #   dirtyAreaCache = [
+        #     "nav-bar"
+        #     "PersonalToolbar"
+        #     "toolbar-menubar"
+        #     "TabsToolbar"
+        #     "widget-overflow-fixed-list"
+        #     "vertical-tabs"
+        #   ];
+        #   currentVersion = 23;
+        #   newElementCount = 10;
+        # };
       };
     };
   };
