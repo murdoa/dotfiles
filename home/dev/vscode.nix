@@ -22,6 +22,7 @@
         ms-python.debugpy
         ms-python.vscode-python-envs
         anthropic.claude-code
+        shd101wyy.markdown-preview-enhanced
       ];
   };
 
