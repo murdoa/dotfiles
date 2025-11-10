@@ -36,6 +36,7 @@
     let
       lib = nixpkgs.lib;
       system = "x86_64-linux";
+      mainUser = "aodhan";
       pkgs = import nixpkgs {
         inherit system;
         config.allowUnfree = true;
@@ -51,6 +52,9 @@
           # Import the previous configuration.nix
           ./configuration.nix
         ];
+        specialArgs = {
+          inherit mainUser;
+        };
       };
 
       homeConfigurations = {

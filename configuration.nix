@@ -2,7 +2,12 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
+{
+  config,
+  pkgs,
+  mainUser,
+  ...
+}:
 
 {
   imports = [
@@ -72,9 +77,9 @@
   # services.xserver.libinput.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.aodhan = {
+  users.users.${mainUser} = {
     isNormalUser = true;
-    description = "aodhan";
+    description = mainUser;
     extraGroups = [
       "networkmanager"
       "wheel"
@@ -128,10 +133,9 @@
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
 
-  networking.extraHosts = 
-    ''
-      0.0.0.0 apresolve.spotify.com
-    '';
+  networking.extraHosts = ''
+    0.0.0.0 apresolve.spotify.com
+  '';
 
   # Enable NVIDIA drivers
   hardware.nvidia.enable = true;
