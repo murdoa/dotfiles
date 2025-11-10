@@ -49,6 +49,8 @@ in
         follow_mouse = 1;
         float_switch_override_focus = 0;
 
+        emulate_discrete_scroll = 0; # disable scroll emulation (messes with looking glass)
+
         sensitivity = 0; # -1.0 - 1.0, 0 means no modification.
 
         touchpad = {
