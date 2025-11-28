@@ -7,4 +7,6 @@
   imports = [
     ./nvidia.nix
   ];
+
+  hardware.enableRedistributableFirmware = true;
 }

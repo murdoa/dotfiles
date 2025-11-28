@@ -46,14 +46,24 @@
       formatter.${system} = nixpkgs.legacyPackages.${system}.nixfmt-rfc-style;
 
       # nixos referres to hostname
-      nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
-        inherit system;
-        modules = [
-          # Import the previous configuration.nix
-          ./configuration.nix
-        ];
-        specialArgs = {
-          inherit mainUser;
+      nixosConfigurations = {
+        nixos-desktop = nixpkgs.lib.nixosSystem {
+          inherit system;
+          modules = [
+            ./hosts/nixos-desktop/configuration.nix
+          ];
+          specialArgs = {
+            inherit mainUser;
+          };
+        };
+        nixos-laptop = nixpkgs.lib.nixosSystem {
+          inherit system;
+          modules = [
+            ./hosts/nixos-laptop/configuration.nix
+          ];
+          specialArgs = {
+            inherit mainUser;
+          };
         };
       };
 
