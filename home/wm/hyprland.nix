@@ -54,7 +54,7 @@ in
         sensitivity = 0; # -1.0 - 1.0, 0 means no modification.
 
         touchpad = {
-          natural_scroll = false;
+          natural_scroll = true;
           disable_while_typing = false;
           scroll_factor = 1.0;
         };

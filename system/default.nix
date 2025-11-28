@@ -5,7 +5,6 @@
 }:
 {
   imports = [
-    ./virt
     ./graphics.nix
   ];
 }
