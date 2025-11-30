@@ -130,6 +130,7 @@
           "history"
           "bookmarks"
         ];
+        "sidebar.expandOnHover" = true;
 
         # Enabled Unified Extensions
         extensions.unifiedExtensions.enable = true;

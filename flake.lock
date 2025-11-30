@@ -82,6 +82,22 @@
         "type": "github"
       }
     },
+    "nixos-hardware": {
+      "locked": {
+        "lastModified": 1764328224,
+        "narHash": "sha256-hFyF1XQd+XrRx7WZCrGJp544dykexD8Q5SrJJZpEQYg=",
+        "owner": "NixOS",
+        "repo": "nixos-hardware",
+        "rev": "d62603a997438e19182af69d3ce7be07565ecad4",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "master",
+        "repo": "nixos-hardware",
+        "type": "github"
+      }
+    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1760284886,
@@ -136,6 +152,7 @@
         "firefox-addons": "firefox-addons",
         "home-manager": "home-manager",
         "nix-vscode-extensions": "nix-vscode-extensions",
+        "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs_2",
         "walker": "walker"
       }
