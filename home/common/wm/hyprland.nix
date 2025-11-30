@@ -163,6 +163,7 @@ in
         "$mainMod, R, exec, $menu"
         "$mainMod, P, pseudo, # dwindle"
         "$mainMod, J, togglesplit, # dwindle"
+        "$mainMod, L, exec, pidof hyprlock || hyprlock"
         # Swap windows and master
         "$mainMod SHIFT, J, layoutmsg, swapwithmaster"
         "$mainMod, T, layoutmsg, swapsplit"
