@@ -35,6 +35,7 @@
         modules-right = [
           "custom/media"
           "network"
+          "battery"
           "group/group-power"
         ];
 
@@ -53,36 +54,42 @@
           orientation = "horizontal";
           drawer = {
             transition-duration = 500;
-            children-class = "launcher";
-            transition-left-to-right = false;
+            children-class = "drawer-child";
+            transition-left-to-right = true;
           };
           modules = [
             "custom/power" # First element is the "group leader" and won't ever be hidden
-            "custom/quit"
-            # "custom/lock"
+            "custom/logout"
+            "custom/lock"
+            "custom/sleep"
             "custom/reboot"
           ];
         };
 
-        "custom/quit" = {
-          format = "Quit";
+        "custom/logout" = {
+          format = "Logout";
           tooltip = false;
           on-click = "hyprctl dispatch exit";
         };
-        # "custom/lock" = {
-        #   format = "Lock";
-        #   tooltip = false;
-        #   on-click = "swaylock";
-        # };
+        "custom/lock" = {
+          format = "Lock";
+          tooltip = false;
+          on-click = "hyprlock";
+        };
+        "custom/sleep" = {
+          format = "Sleep";
+          tooltip = false;
+          on-click = "systemctl suspend";
+        };
         "custom/reboot" = {
           format = "Reboot";
           tooltip = false;
-          on-click = "reboot";
+          on-click = "systemctl reboot";
         };
         "custom/power" = {
           format = "Power";
           tooltip = false;
-          on-click = "shutdown now";
+          on-click = "systemctl poweroff";
         };
 
       }

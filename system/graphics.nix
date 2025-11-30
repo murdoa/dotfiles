@@ -34,5 +34,6 @@
     pkgs.wofi
     pkgs.waybar
     pkgs.font-awesome
+    pkgs.brightnessctl
   ];
 }

@@ -24,6 +24,8 @@
       url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    nixos-hardware.url = "github:NixOS/nixos-hardware/master";
   };
 
   outputs =
@@ -31,6 +33,7 @@
       self,
       nixpkgs,
       home-manager,
+      nixos-hardware,
       ...
     }@inputs:
     let
@@ -60,6 +63,7 @@
           inherit system;
           modules = [
             ./hosts/nixos-laptop/configuration.nix
+            nixos-hardware.nixosModules.dell-latitude-7390
           ];
           specialArgs = {
             inherit mainUser;
@@ -68,9 +72,14 @@
       };
 
       homeConfigurations = {
-        aodhan = home-manager.lib.homeManagerConfiguration {
+        "aodhan@nixos-desktop" = home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
-          modules = [ ./home.nix ];
+          modules = [ ./home/aodhan-nixos-desktop.nix ];
+          extraSpecialArgs = { inherit inputs system; };
+        };
+        "aodhan@nixos-laptop" = home-manager.lib.homeManagerConfiguration {
+          inherit pkgs;
+          modules = [ ./home/aodhan-nixos-laptop.nix ];
           extraSpecialArgs = { inherit inputs system; };
         };
       };

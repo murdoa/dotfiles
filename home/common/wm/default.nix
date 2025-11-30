@@ -6,6 +6,7 @@
 {
   imports = [
     ./hyprland.nix
+    ./hypridle.nix
     ./waybar
   ];
 
@@ -20,6 +21,7 @@
     noto-fonts
     noto-fonts-emoji
     proggyfonts
+    hyprlock
   ];
 
   gtk = {
