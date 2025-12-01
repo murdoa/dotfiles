@@ -47,6 +47,7 @@ button:hover {
 
 #workspaces button.active {
     color: #26A65B;
+    font-weight: 900;
 }
 
 #mode {
