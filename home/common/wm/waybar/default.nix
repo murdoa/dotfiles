@@ -11,7 +11,7 @@
 
   programs.waybar = {
     enable = true;
-    style = builtins.readFile ./style.css;
+    style = builtins.readFile ./style-transparent.css;
 
     settings = [
       {
@@ -41,6 +41,14 @@
           "group/group-battery"
           "group/group-power"
         ];
+
+        "hyprland/window" = {
+          format = "{}";
+          "rewrite" = {
+            "(.*) - Mozilla Firefox" = "🌎 $1";
+            "(.*) - zsh" = "> [$1]";
+          };
+        };
 
         mpris = {
           format = "{status_icon}";
