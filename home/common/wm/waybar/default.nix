@@ -31,9 +31,12 @@
           "hyprland/scratchpad"
         ];
 
-        modules-center = [ "hyprland/window" ];
+        modules-center = [ 
+          # "hyprland/window" 
+        ];
 
         modules-right = [
+          "group/group-telemetry"
           "mpris"
           "pulseaudio"
           "network"
@@ -81,6 +84,41 @@
           ];
         };
 
+        "group/group-telemetry" = {
+          orientation = "horizontal";
+          drawer = {
+            transition-duration = 150;
+            transition-left-to-right = false;
+          };
+          modules = [
+            "custom/telemetry"
+            "cpu"
+            "memory"
+            "temperature"
+            "disk"
+          ];
+        };
+        
+        "custom/telemetry" = {
+          format = "";
+        };
+
+        cpu = {
+          format = "  {usage}%";
+        };
+
+        memory = {
+          format = "  {percentage}%";
+        };
+
+        disk = {
+          format = "  {percentage_used}%";
+        };
+
+        temperature = {
+          format = "  {temperatureC}°C";
+        };
+
         "group/group-battery" = {
           orientation = "horizontal";
           drawer = {
@@ -110,8 +148,8 @@
         };
 
         pulseaudio = {
-          format = "{volume}% {icon}";
-          format-bluetooth = "{volume}% {icon}";
+          format = "{icon}  {volume}%";
+          format-bluetooth = "{icon}  {volume}%";
           format-muted = "";
           format-icons = {
             headphones = "";
