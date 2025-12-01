@@ -1,0 +1,218 @@
+* {
+    font-family: FontAwesome, Roboto, Helvetica, Arial, sans-serif;
+    font-size: 13px;
+}
+
+window#waybar {
+    background-color: rgba(43, 48, 59, 0.0);
+    border-bottom: 3px solid rgba(100, 114, 125, 0.0);
+    color: #ffffff;
+    transition-property: background-color;
+    transition-duration: .5s;
+}
+
+window#waybar.hidden {
+    opacity: 0.2;
+}
+
+button {
+    box-shadow: inset 0 -3px transparent;
+    border: none;
+    border-radius: 0;
+}
+
+button:hover {
+    background: inherit;
+    box-shadow: inset 0 -3px #ffffff;
+}
+
+#workspaces button {
+    padding: 0 5px;
+    background-color: transparent;
+    color: #ffffff;
+}
+
+#workspaces button:hover {
+    background: rgba(0, 0, 0, 0.2);
+}
+
+#workspaces button.focused {
+    background-color: #64727D;
+    box-shadow: inset 0 -3px #ffffff;
+}
+
+#workspaces button.urgent {
+    background-color: #eb4d4b;
+}
+
+#mode {
+    background-color: #64727D;
+    box-shadow: inset 0 -3px #ffffff;
+}
+
+#pulseaudio,
+#battery,
+#network,
+#custom-media,
+#mode,
+#scratchpad {
+    padding: 0 10px;
+    color: #ffffff;
+}
+
+#window,
+#workspaces {
+    margin: 0 4px;
+}
+
+.modules-left > widget:first-child > #workspaces {
+    margin-left: 0;
+}
+
+.modules-right > widget:last-child > #workspaces {
+    margin-right: 0;
+}
+
+#battery {
+    /* background-color: #ffffff; */
+    /* color: #000000; */
+}
+
+#battery.charging, #battery.plugged {
+    /* color: #ffffff; */
+    /* background-color: #26A65B; */
+    background-color: rgba(38, 166, 91, 0);
+    color: #26A65B;
+    font-weight: 900;
+}
+
+@keyframes blink {
+    to {
+        background-color: #ffffff;
+        color: #000000;
+    }
+}
+
+#battery.critical:not(.charging) {
+    background-color: #f53c3c;
+    color: #ffffff;
+    animation-name: blink;
+    animation-duration: 0.5s;
+    animation-timing-function: steps(12);
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+#network {
+    /* background-color: #2980b9; */
+}
+
+#network.disconnected {
+    background-color: #f53c3c;
+}
+
+#custom-media {
+    background-color: #66cc99;
+    color: #2a5c45;
+    min-width: 100px;
+}
+
+#scratchpad {
+    background: rgba(0, 0, 0, 0.2);
+}
+
+#scratchpad.empty {
+    background-color: transparent;
+}
+
+/* Power module group styling */
+#group-power {
+    /* margin: 0 4px; */
+}
+
+/* Power module buttons */
+#custom-power,
+#custom-logout,
+#custom-lock,
+#custom-sleep,
+#custom-reboot {
+    padding: 0 10px;
+    border-radius: 0;
+    font-weight: 900;
+    transition: all 0.3s ease;
+    min-width: 25px;
+}
+
+/* Power button - main trigger */
+#custom-power {
+    background: linear-gradient(45deg, #e74c3c, #c0392b);
+    color: #ffffff;
+    box-shadow: 0 2px 4px rgba(231, 76, 60, 0.3);
+    border-radius: 1000px 0px 0px 1000px;
+}
+
+#custom-power:hover {
+    background: linear-gradient(45deg, #c0392b, #a93226);
+    box-shadow: 0 4px 8px rgba(231, 76, 60, 0.4);
+}
+
+/* Logout button */
+#custom-logout {
+    background: linear-gradient(45deg, #f39c12, #e67e22);
+    color: #ffffff;
+    box-shadow: 0 2px 4px rgba(243, 156, 18, 0.3);
+}
+
+#custom-logout:hover {
+    background: linear-gradient(45deg, #e67e22, #d35400);
+    box-shadow: 0 4px 8px rgba(243, 156, 18, 0.4);
+}
+
+/* Lock button */
+#custom-lock {
+    background: linear-gradient(45deg, #9b59b6, #8e44ad);
+    color: #ffffff;
+    box-shadow: 0 2px 4px rgba(155, 89, 182, 0.3);
+}
+
+#custom-lock:hover {
+    background: linear-gradient(45deg, #8e44ad, #7d3c98);
+    box-shadow: 0 4px 8px rgba(155, 89, 182, 0.4);
+}
+
+/* Sleep button */
+#custom-sleep {
+    background: linear-gradient(45deg, #2ecc71, #27ae60);
+    color: #ffffff;
+    box-shadow: 0 2px 4px rgba(46, 204, 113, 0.3);
+}
+
+#custom-sleep:hover {
+    background: linear-gradient(45deg, #27ae60, #229954);
+    box-shadow: 0 4px 8px rgba(46, 204, 113, 0.4);
+}
+
+/* Reboot button */
+#custom-reboot {
+    background: linear-gradient(45deg, #3498db, #2980b9);
+    color: #ffffff;
+    box-shadow: 0 2px 4px rgba(52, 152, 219, 0.3);
+}
+
+#custom-reboot:hover {
+    background: linear-gradient(45deg, #2980b9, #21618c);
+    box-shadow: 0 4px 8px rgba(52, 152, 219, 0.4);
+}
+
+/* Drawer animation for power group */
+.drawer-child {
+    margin: 0;
+    padding: 0;
+    border-radius: 0;
+    background: rgba(0, 0, 0, 0.1);
+    transition: all 0.5s ease;
+}
+
+.drawer-child:hover {
+    background: rgba(0, 0, 0, 0.2);
+}
