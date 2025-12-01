@@ -6,6 +6,7 @@
 {
   home.packages = [
     pkgs.playerctl
+    pkgs.pavucontrol
   ];
 
   programs.waybar = {
@@ -34,6 +35,7 @@
 
         modules-right = [
           "custom/media"
+          "pulseaudio"
           "network"
           "battery"
           "group/group-power"
@@ -49,6 +51,26 @@
           interval = 10;
           exec = "${scripts/media.sh}";
         };
+        "pulseaudio" = {
+          "format" = "{volume}% {icon}";
+          "format-bluetooth" = "{volume}% {icon}";
+          "format-muted" = "";
+          "format-icons" = {
+            "headphones" = "";
+            "handsfree" = "";
+            "headset" = "";
+            "phone" = "";
+            "phone-muted" = "";
+            "portable" = "";
+            "car" = "";
+            "default" = [
+              ""
+              ""
+            ];
+          };
+          "scroll-step" = 1;
+          "on-click" = "pavucontrol";
+        };
 
         "group/group-power" = {
           orientation = "horizontal";
@@ -59,35 +81,35 @@
           };
           modules = [
             "custom/power" # First element is the "group leader" and won't ever be hidden
-            "custom/logout"
-            "custom/lock"
-            "custom/sleep"
             "custom/reboot"
+            "custom/logout"
+            "custom/sleep"
+            "custom/lock"
           ];
         };
 
         "custom/logout" = {
-          format = "Logout";
+          format = "󰗽";
           tooltip = false;
           on-click = "hyprctl dispatch exit";
         };
         "custom/lock" = {
-          format = "Lock";
+          format = "";
           tooltip = false;
           on-click = "hyprlock";
         };
         "custom/sleep" = {
-          format = "Sleep";
+          format = "󰒲";
           tooltip = false;
           on-click = "systemctl suspend";
         };
         "custom/reboot" = {
-          format = "Reboot";
+          format = "󰜉";
           tooltip = false;
           on-click = "systemctl reboot";
         };
         "custom/power" = {
-          format = "Power";
+          format = "⏻";
           tooltip = false;
           on-click = "systemctl poweroff";
         };
