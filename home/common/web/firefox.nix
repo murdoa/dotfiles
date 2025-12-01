@@ -14,16 +14,8 @@ let
     order = [
       "ddg"
       "google"
-      "kagi"
     ];
-    engines = {
-      kagi = {
-        name = "Kagi";
-        urls = [ { template = "https://kagi.com/search?q={searchTerms}"; } ];
-        icon = "https://kagi.com/favicon.ico";
-      };
-      bing.metaData.hidden = true;
-    };
+    engines.bing.metaData.hidden = true;
   };
 
   commonExtensions = with inputs.firefox-addons.packages.${system}; [
