@@ -14,46 +14,120 @@
   programs.hyprlock = {
     enable = true;
     settings = {
+      # BACKGROUND
+      background = {
+        monitor = "";
+        #path = screenshot
+        path = "${../../assets/wallpapers/huygens-landing.png}";
+        #color = $background
+        blur_passes = 2;
+        contrast = 1;
+        brightness = 0.5;
+        vibrancy = 0.2;
+        vibrancy_darkness = 0.2;
+      };
+
+      # GENERAL
       general = {
-        hide_cursor = true;
-        ignore_empty_input = true;
+        no_fade_in = true;
+        no_fade_out = true;
+        hide_cursor = false;
+        grace = 0;
+        disable_loading_bar = true;
       };
 
-      animations = {
-        enabled = true;
-        fade_in = {
-          duration = 300;
-          bezier = "easeOutQuint";
-        };
-        fade_out = {
-          duration = 300;
-          bezier = "easeOutQuint";
-        };
+      # INPUT FIELD
+      input-field = {
+        monitor = "";
+        size = "250, 60";
+        outline_thickness = 2;
+        dots_size = 0.2; # Scale of input-field height, 0.2 - 0.8;
+        dots_spacing = 0.35; # Scale of dots' absolute size, 0.0 - 1.0;
+        dots_center = true;
+        outer_color = "rgba(0, 0, 0, 0)";
+        inner_color = "rgba(0, 0, 0, 0.2)";
+        # font_color = $foreground;
+        fade_on_empty = false;
+        rounding = -1;
+        check_color = "rgb(204, 136, 34)";
+        placeholder_text = "<i><span foreground=\"##cdd6f4\">Input Password...</span></i>";
+        hide_input = false;
+        position = "0, -200";
+        halign = "center";
+        valign = "center";
       };
 
-      background = [
+      # LABELS
+      label = [
+        # DATE
         {
-          path = "screenshot";
-          blur_passes = 3;
-          blur_size = 8;
-        }
-      ];
-
-      input-field = [
-        {
-          size = "200, 50";
-          position = "0, -80";
           monitor = "";
-          dots_center = true;
-          fade_on_empty = false;
-          font_color = "rgb(202, 211, 245)";
-          inner_color = "rgb(91, 96, 120)";
-          outer_color = "rgb(24, 25, 38)";
-          outline_thickness = 5;
-          placeholder_text = "<span foreground=\"##cad3f5\">Password...</span>";
-          shadow_passes = 2;
+          text = "cmd[update:1000] echo \"$(date +\"%A, %B %d\")\"";
+          color = "rgba(242, 243, 244, 0.75)";
+          font_size = 22;
+          font_family = "JetBrains Mono";
+          position = "0, 300";
+          halign = "center";
+          valign = "center";
+        }
+        # TIME
+        {
+          monitor = "";
+          text = "cmd[update:1000] echo \"$(date +\"%-I:%M\")\"";
+          color = "rgba(242, 243, 244, 0.75)";
+          font_size = 95;
+          font_family = "JetBrains Mono Extrabold";
+          position = "0, 200";
+          halign = "center";
+          valign = "center";
+        }
+        # USERNAME
+        # {
+        #   monitor = "";
+        #   text = "cmd[update:1000] echo \"$(whoami)\"";
+        #   # color = $foreground
+        #   font_size = 14;
+        #   font_family = "JetBrains Mono";
+        #   position = "0, -10";
+        #   halign = "center";
+        #   valign = "top";
+        # }
+        # BATTERY
+        {
+          monitor = "";
+          text = "cmd[update:1000] echo \"$(cat /sys/class/power_supply/BAT0/capacity)\"%";
+          # color = $foreground;
+          font_size = 24;
+          font_family = "JetBrains Mono";
+          position = "-30, -10";
+          halign = "right";
+          valign = "top";
+        }
+        # CURRENT SONG
+        {
+          monitor = "";
+          text = "cmd[update:1000] echo \"$(playerctl metadata -s xesam:artist) - $(playerctl metadata -s xesam:title)\"";
+          # color = $foreground
+          color = "rgba(255, 255, 255, 0.6)";
+          font_size = 18;
+          font_family = "JetBrains Mono"; #"Metropolis Light, Font Awesome 6 Free Solid";
+          position = "0, 50";
+          halign = "center";
+          valign = "bottom";
         }
       ];
+
+      # Desktop Environment
+      image = {
+        monitor = "";
+        path = "${../../assets/images/hyprland_logo.png}";
+        size = 75;
+        border_size = 2;
+        # border_color = $foreground
+        position = "-50, 50";
+        halign = "right";
+        valign = "bottom";
+      };
     };
   };
 }
