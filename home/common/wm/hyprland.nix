@@ -261,6 +261,7 @@ in
         "bordersize 2,focus:0,floating:1,pinned:1"
         "float, center, class:org.pulseaudio.pavucontrol"
         "size 850 500, class:org.pulseaudio.pavucontrol"
+        "bordersize 0, onworkspace:w[1]"
       ];
 
       xwayland = {
