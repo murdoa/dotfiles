@@ -7,8 +7,17 @@ let
   terminal = "kitty";
   fileManager = "nautilus";
   menu = "walker";
+  grimblastBin = "${pkgs.grimblast}/bin/grimblast";
+  wfrecorderBin = "${pkgs.wf-recorder}/bin/wf-recorder";
+  xdg-user-dirBin = "${pkgs.xdg-user-dirs}/bin/xdg-user-dir";
 in
 {
+  home.packages = with pkgs; [
+    grimblast
+    wf-recorder
+    slurp
+    xdg-user-dirs
+  ];
   wayland.windowManager.hyprland = {
     enable = true;
     package = pkgs.hyprland;
@@ -188,7 +197,7 @@ in
         "$mainMod, 8, workspace, 8"
         "$mainMod, 9, workspace, 9"
         "$mainMod, 0, workspace, 10"
-        
+
         # Move active window around current workspace
         "$mainMod SHIFT, left, movewindow, l"
         "$mainMod SHIFT, right, movewindow, r"
@@ -227,6 +236,22 @@ in
         # Scroll through existing workspaces with mainMod + scroll
         "$mainMod, mouse_down, workspace, e+1"
         "$mainMod, mouse_up, workspace, e-1"
+
+        # Screenshot binds
+        ", Print, exec, ${grimblastBin} save screen $(${xdg-user-dirBin} PICTURES)/$(TZ=utc date +'screenshot_%Y-%m-%d-%H%M%S.%3N.png')"
+        "SHIFT, Print, exec, ${grimblastBin} save area $(${xdg-user-dirBin} PICTURES)/$(TZ=utc date +'screenshot_%Y-%m-%d-%H%M%S.%3N.png')"
+        "ALT, Print, exec, ${grimblastBin} save active $(${xdg-user-dirBin} PICTURES)/$(TZ=utc date +'screenshot_%Y-%m-%d-%H%M%S.%3N.png')"
+        "SHIFT ALT, Print, exec, ${grimblastBin} save output $(${xdg-user-dirBin} PICTURES)/$(TZ=utc date +'screenshot_%Y-%m-%d-%H%M%S.%3N.png')"
+        "CTRL, Print, exec, ${grimblastBin} copy screen"
+        "CTRL SHIFT, Print, exec, ${grimblastBin} copy area"
+        "CTRL ALT, Print, exec, ${grimblastBin} copy active"
+        "CTRL SHIFT ALT, Print, exec, ${grimblastBin} copy output"
+
+        # Screen recording binds
+        "$mainMod, Print, exec, ${wfrecorderBin} -f $(${xdg-user-dirBin} VIDEOS)/$(TZ=utc date +'recording_%Y-%m-%d-%H%M%S.%3N.mp4')"
+        "$mainMod SHIFT, Print, exec, ${wfrecorderBin} -g \"$(slurp)\" -f $(${xdg-user-dirBin} VIDEOS)/$(TZ=utc date +'recording_%Y-%m-%d-%H%M%S.%3N.mp4')"
+        "$mainMod ALT, Print, exec, ${wfrecorderBin} --audio -f $(${xdg-user-dirBin} VIDEOS)/$(TZ=utc date +'recording_%Y-%m-%d-%H%M%S.%3N.mp4')"
+        "$mainMod SHIFT ALT, Print, exec, ${wfrecorderBin} --audio -g \"$(slurp)\" -f $(${xdg-user-dirBin} VIDEOS)/$(TZ=utc date +'recording_%Y-%m-%d-%H%M%S.%3N.mp4')"
       ];
 
       bindm = [

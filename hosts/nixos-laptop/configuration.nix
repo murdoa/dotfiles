@@ -5,17 +5,18 @@
 { config, pkgs, ... }:
 
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-      ../../system
-    ];
+  imports = [
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+    ../../system
+  ];
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  boot.initrd.luks.devices."luks-c930bf55-684f-4de7-8014-01102f027784".device = "/dev/disk/by-uuid/c930bf55-684f-4de7-8014-01102f027784";
+  boot.initrd.luks.devices."luks-c930bf55-684f-4de7-8014-01102f027784".device =
+    "/dev/disk/by-uuid/c930bf55-684f-4de7-8014-01102f027784";
   networking.hostName = "nixos-laptop"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
@@ -73,9 +74,14 @@
   users.users.aodhan = {
     isNormalUser = true;
     description = "aodhan";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+      "input"
+      "dialout"
+    ];
     packages = with pkgs; [
-    #  thunderbird
+      #  thunderbird
     ];
   };
 
@@ -90,7 +96,7 @@
     "nix-command"
     "flakes"
   ];
-  
+
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
@@ -135,6 +141,6 @@
   environment.shells = with pkgs; [ zsh ];
   users.defaultUserShell = pkgs.zsh;
   programs.zsh.enable = true;
-  
+
   services.thermald.enable = true;
 }

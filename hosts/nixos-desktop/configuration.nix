@@ -13,7 +13,7 @@
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
-    ./system
+    ../../system
     ./virt
   ];
 
@@ -85,6 +85,7 @@
       "networkmanager"
       "wheel"
       "input"
+      "dialout"
     ];
     packages = with pkgs; [
       #  thunderbird
