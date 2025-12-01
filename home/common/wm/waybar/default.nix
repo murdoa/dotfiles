@@ -34,12 +34,61 @@
         modules-center = [ "hyprland/window" ];
 
         modules-right = [
-          "custom/media"
+          "mpris"
           "pulseaudio"
           "network"
-          "battery"
+          "clock"
+          "group/group-battery"
           "group/group-power"
         ];
+
+        mpris = {
+          format = "{status_icon}";
+          tooltip-format = "{artist}: {title} [{position}/{length}]\n{player}: {status}";
+          status-icons = {
+            paused = "";
+            playing = "";
+          };
+        };
+
+        battery = {
+          states = {
+            # good = 95;
+            warning = 30;
+            critical = 15;
+          };
+          format = "{capacity}%";
+          format-full = "{capacity}%";
+          format-charging = "{capacity}% 󱐋";
+          format-plugged = "{capacity}% ";
+          format-alt = "{time}";
+          # format-good = ""; // An empty format will hide the module
+          # format-full = "";
+          format-icons = [
+            ""
+            ""
+            ""
+            ""
+            ""
+          ];
+        };
+
+        "group/group-battery" = {
+          orientation = "horizontal";
+          drawer = {
+            transition-duration = 150;
+            transition-left-to-right = false;
+          };
+          modules = [
+            "battery"
+            "power-profiles-daemon"
+          ];
+        };
+
+        clock = {
+          tooltip-format = "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>";
+          format-alt = "{:%Y-%m-%d}";
+        };
 
         network = {
           tooltip = true;
@@ -51,25 +100,38 @@
           interval = 10;
           exec = "${scripts/media.sh}";
         };
-        "pulseaudio" = {
-          "format" = "{volume}% {icon}";
-          "format-bluetooth" = "{volume}% {icon}";
-          "format-muted" = "";
-          "format-icons" = {
-            "headphones" = "";
-            "handsfree" = "";
-            "headset" = "";
-            "phone" = "";
-            "phone-muted" = "";
-            "portable" = "";
-            "car" = "";
-            "default" = [
+
+        pulseaudio = {
+          format = "{volume}% {icon}";
+          format-bluetooth = "{volume}% {icon}";
+          format-muted = "";
+          format-icons = {
+            headphones = "";
+            handsfree = "";
+            headset = "";
+            phone = "";
+            phone-muted = "";
+            portable = "";
+            car = "";
+            default = [
               ""
               ""
             ];
           };
-          "scroll-step" = 1;
-          "on-click" = "pavucontrol";
+          scroll-step = 1;
+          on-click = "pavucontrol";
+        };
+
+        power-profiles-daemon = {
+          format = "{icon}";
+          tooltip-format = "Power profile: {profile}\nDriver: {driver}";
+          tooltip = true;
+          format-icons = {
+            default = "";
+            performance = "";
+            balanced = "";
+            power-saver = "";
+          };
         };
 
         "group/group-power" = {

@@ -102,6 +102,7 @@
     wireguard-tools
     zip
     unzip
+    auto-cpufreq
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -134,4 +135,6 @@
   environment.shells = with pkgs; [ zsh ];
   users.defaultUserShell = pkgs.zsh;
   programs.zsh.enable = true;
+  
+  services.thermald.enable = true;
 }
