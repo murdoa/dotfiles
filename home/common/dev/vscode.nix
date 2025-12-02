@@ -25,7 +25,11 @@ in
   programs.vscode = {
     enable = true;
 
-    profiles.default.extensions = common-extensions;
+    profiles.default.extensions =
+      with vscode-marketplace;
+      [
+      ]
+      ++ common-extensions;
 
     profiles.python.extensions =
       with vscode-marketplace;
@@ -39,35 +43,37 @@ in
     profiles.verilog.extensions =
       with vscode-marketplace;
       [
+
         mshr-h.veriloghdl
       ]
       ++ common-extensions;
-
   };
 
-  xdg.desktopEntries = builtins.listToAttrs (map (name: {
-    name = "vscode-${name}";
-    value = {
-      name = "Visual Studio Code (${lib.strings.toUpper (lib.substring 0 1 name)}${
-        lib.substring 1 (lib.stringLength name) name
-      })";
-      comment = "Code Editing. Redefined.";
-      exec = "code --profile ${name} %F";
-      icon = "vscode";
-      type = "Application";
-      categories = [
-        "Utility"
-        "TextEditor"
-        "Development"
-        "IDE"
-      ];
-      settings = {
-        GenericName = "Text Editor";
-        Keywords = "vscode";
-        StartupNotify = "true";
-        StartupWMClass = "Code";
-        Version = "1.4";
+  xdg.desktopEntries = builtins.listToAttrs (
+    map (name: {
+      name = "vscode-${name}";
+      value = {
+        name = "Visual Studio Code (${lib.strings.toUpper (lib.substring 0 1 name)}${
+          lib.substring 1 (lib.stringLength name) name
+        })";
+        comment = "Code Editing. Redefined.";
+        exec = "code --profile ${if name == "default" then "Default" else name} %F";
+        icon = "vscode";
+        type = "Application";
+        categories = [
+          "Utility"
+          "TextEditor"
+          "Development"
+          "IDE"
+        ];
+        settings = {
+          GenericName = "Text Editor";
+          Keywords = "vscode";
+          StartupNotify = "true";
+          StartupWMClass = "Code";
+          Version = "1.4";
+        };
       };
-    };
-  }) (builtins.attrNames config.programs.vscode.profiles));
+    }) (builtins.attrNames config.programs.vscode.profiles)
+  );
 }
