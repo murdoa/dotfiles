@@ -9,5 +9,5 @@
     pkgs.libreoffice
     pkgs.imagemagick
   ];
-  
+
 }

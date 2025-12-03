@@ -8,7 +8,6 @@
     ./graphics.nix
   ];
 
-
   environment.systemPackages = with pkgs; [
     screen
   ];

@@ -110,7 +110,7 @@
           # color = $foreground
           color = "rgba(255, 255, 255, 0.6)";
           font_size = 18;
-          font_family = "JetBrains Mono"; #"Metropolis Light, Font Awesome 6 Free Solid";
+          font_family = "JetBrains Mono"; # "Metropolis Light, Font Awesome 6 Free Solid";
           position = "0, 50";
           halign = "center";
           valign = "bottom";
