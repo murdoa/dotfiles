@@ -15,6 +15,7 @@ let
     anthropic.claude-code
     shd101wyy.markdown-preview-enhanced
     tamasfe.even-better-toml
+    github.copilot
   ];
 in
 {
@@ -45,6 +46,9 @@ in
     profiles.verilog.extensions =
       with vscode-marketplace;
       [
+        ms-vscode.cmake-tools
+        ms-vscode.cpptools
+        ms-vscode.cpptools-extension-pack
         mshr-h.veriloghdl
       ]
       ++ common-extensions;
