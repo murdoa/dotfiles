@@ -31,8 +31,8 @@
           "hyprland/scratchpad"
         ];
 
-        modules-center = [ 
-          # "hyprland/window" 
+        modules-center = [
+          # "hyprland/window"
         ];
 
         modules-right = [
@@ -98,7 +98,7 @@
             "disk"
           ];
         };
-        
+
         "custom/telemetry" = {
           format = "";
         };
