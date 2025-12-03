@@ -14,6 +14,7 @@ let
     mkhl.direnv
     anthropic.claude-code
     shd101wyy.markdown-preview-enhanced
+    github.copilot
   ];
 in
 {
