@@ -38,6 +38,7 @@ in
         ms-python.python
         ms-python.debugpy
         ms-python.vscode-python-envs
+        ms-toolsai.jupyter
       ]
       ++ common-extensions;
 
