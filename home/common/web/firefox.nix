@@ -127,6 +127,7 @@ let
     "media.eme.enabled" = true;
 
     # Layout
+    "browser.fullscreen.autohide" = false; # don't hide address bar in fullscreen mode
     "browser.uiCustomization.state" = builtins.toJSON {
       "placements" = {
         "widget-overflow-fixed-list" = [ ];
