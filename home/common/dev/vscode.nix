@@ -14,6 +14,7 @@ let
     mkhl.direnv
     anthropic.claude-code
     shd101wyy.markdown-preview-enhanced
+    tamasfe.even-better-toml
   ];
 in
 {
@@ -43,8 +44,15 @@ in
     profiles.verilog.extensions =
       with vscode-marketplace;
       [
-
         mshr-h.veriloghdl
+      ]
+      ++ common-extensions;
+
+    profiles.rust.extensions =
+      with vscode-marketplace;
+      [
+        mshr-h.veriloghdl
+        rust-lang.rust-analyzer
       ]
       ++ common-extensions;
   };

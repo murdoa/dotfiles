@@ -9,6 +9,7 @@
     ./formatting.nix
     ./git.nix
     ./reverse.nix
+    ./rust.nix
     ./python.nix
     ./tmux.nix
     ./vscode.nix

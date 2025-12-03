@@ -1,0 +1,19 @@
+{
+  lib,
+  pkgs,
+  inputs,
+  ...
+}:
+{
+  home.packages = with pkgs; [
+    cargo
+    rustc
+    rustPlatform.bindgenHook
+    pkg-config
+    cargo-watch
+    cargo-edit
+    rust-analyzer
+    clippy
+    rustfmt
+  ];
+}
