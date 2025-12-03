@@ -6,6 +6,7 @@
 {
   imports = [
     ./ai.nix
+    ./formatting.nix
     ./git.nix
     ./reverse.nix
     ./python.nix
