@@ -43,7 +43,9 @@ in
     profiles.verilog.extensions =
       with vscode-marketplace;
       [
-
+        ms-vscode.cmake-tools
+        ms-vscode.cpptools
+        ms-vscode.cpptools-extension-pack
         mshr-h.veriloghdl
       ]
       ++ common-extensions;
