@@ -40,6 +40,7 @@ in
         ms-python.debugpy
         ms-python.vscode-python-envs
         ms-toolsai.jupyter
+	ms-toolsai.jupyter-keymap
       ]
       ++ common-extensions;
 
