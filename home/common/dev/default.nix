@@ -12,5 +12,6 @@
     ./python.nix
     ./tmux.nix
     ./vscode.nix
+    ./cc.nix
   ];
 }
