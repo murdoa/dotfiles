@@ -9,6 +9,7 @@
     cargo
     rustc
     rustPlatform.bindgenHook
+    openssl
     pkg-config
     cargo-watch
     cargo-edit
