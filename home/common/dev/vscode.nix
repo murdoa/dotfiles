@@ -16,6 +16,7 @@ let
     shd101wyy.markdown-preview-enhanced
     tamasfe.even-better-toml
     github.copilot
+    openai.chatgpt
   ];
 in
 {
