@@ -10,6 +10,7 @@
     ./web
     ./wm
     ./gnome.nix
+    ./graphics.nix
     ./messaging.nix
     ./music.nix
     ./shell.nix
