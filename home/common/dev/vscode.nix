@@ -62,6 +62,15 @@ in
         rust-lang.rust-analyzer
       ]
       ++ common-extensions;
+
+    profiles.embedded.extensions =
+      with vscode-marketplace;
+      [
+        ms-vscode.cpptools
+        ms-vscode.cpptools-extension-pack
+        microhobby.linuxkerneldev
+      ]
+      ++ common-extensions;
   };
 
   xdg.desktopEntries = builtins.listToAttrs (
