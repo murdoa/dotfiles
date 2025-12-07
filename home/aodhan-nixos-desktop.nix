@@ -8,6 +8,7 @@
   imports = [
     inputs.walker.homeManagerModules.default
     ./common
+    ./desktop
   ];
 
   nixpkgs = {
