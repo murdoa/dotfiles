@@ -12,6 +12,7 @@
   environment.systemPackages = with pkgs; [
     screen
     usbutils
+    jq
   ];
 
   # mDNS resolver
