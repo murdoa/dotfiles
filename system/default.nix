@@ -22,4 +22,5 @@
     SUBSYSTEM=="usb", ATTR{idVendor}=="2a0e", ATTR{idProduct}=="0034", MODE="0666"
   '';
 
+  programs.kdeconnect.enable = true;
 }
