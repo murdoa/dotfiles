@@ -16,6 +16,7 @@ let
     shd101wyy.markdown-preview-enhanced
     tamasfe.even-better-toml
     github.copilot
+    openai.chatgpt
   ];
 in
 {
@@ -59,6 +60,15 @@ in
       [
         mshr-h.veriloghdl
         rust-lang.rust-analyzer
+      ]
+      ++ common-extensions;
+
+    profiles.embedded.extensions =
+      with vscode-marketplace;
+      [
+        ms-vscode.cpptools
+        ms-vscode.cpptools-extension-pack
+        microhobby.linuxkerneldev
       ]
       ++ common-extensions;
   };

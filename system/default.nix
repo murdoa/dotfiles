@@ -1,6 +1,7 @@
 {
   lib,
   pkgs,
+  mainUser,
   ...
 }:
 {
@@ -10,6 +11,7 @@
 
   environment.systemPackages = with pkgs; [
     screen
+    usbutils
   ];
 
   # mDNS resolver
@@ -23,4 +25,14 @@
   '';
 
   programs.kdeconnect.enable = true;
+
+  virtualisation.docker = {
+    enable = false;
+    # Use the rootless mode - run Docker daemon as non-root user
+    rootless = {
+      enable = true;
+      setSocketVariable = true;
+    };
+  };
+  users.users.${mainUser}.extraGroups = [ "docker" ];
 }
