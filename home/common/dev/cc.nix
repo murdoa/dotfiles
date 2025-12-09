@@ -6,11 +6,13 @@
 {
 
   home.packages = with pkgs; [
+    gcc15
+    gnumake
     cmake
     pkg-config
     gdb
     valgrind
-    clang
+    (hiPrio clang)
     clang-tools
     cppcheck
   ];
