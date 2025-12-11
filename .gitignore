@@ -1,1 +1,35 @@
 result
+
+# Security - Prevent accidental commit of sensitive files
+*.key
+*.pem
+*.p12
+*.pfx
+*.crt
+*.cert
+*.csr
+*.pub
+id_rsa*
+id_ed25519*
+id_ecdsa*
+
+# Environment files
+.env
+.env.*
+!.env.example
+
+# Potential backup files 
+*.bak
+*.backup
+*.old
+*.orig
+*.swp
+*.tmp
+
+# SSH and GPG
+.ssh/
+.gnupg/
+
+# Local development
+.vscode/settings.json
+.idea/

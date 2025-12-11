@@ -27,6 +27,10 @@
 
   programs.kdeconnect.enable = true;
 
+  services.ollama = {
+    enable = true;
+  };
+
   virtualisation.docker = {
     enable = false;
     # Use the rootless mode - run Docker daemon as non-root user

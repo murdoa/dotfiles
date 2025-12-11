@@ -154,4 +154,14 @@
   environment.shells = with pkgs; [ zsh ];
   users.defaultUserShell = pkgs.zsh;
   programs.zsh.enable = true;
+
+  services.ollama = {
+    acceleration = "cuda";
+    loadModels = [
+      "gemma3:4b"
+      "gemma3:1b"
+      "gemma3:270m"
+    ];
+  };
+
 }
