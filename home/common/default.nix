@@ -11,6 +11,7 @@
     ./wm
     ./gnome.nix
     ./graphics.nix
+    ./lab.nix
     ./messaging.nix
     ./music.nix
     ./shell.nix
