@@ -40,9 +40,15 @@
       lib = nixpkgs.lib;
       system = "x86_64-linux";
       mainUser = "aodhan";
+      overlays = [
+        (final: prev: {
+          grec = final.callPackage ./pkgs/grec.nix { };
+        })
+      ];
       pkgs = import nixpkgs {
         inherit system;
         config.allowUnfree = true;
+        overlays = overlays;
       };
     in
     {
