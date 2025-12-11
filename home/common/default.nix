@@ -14,6 +14,7 @@
     ./messaging.nix
     ./music.nix
     ./shell.nix
+    ./services.nix
     ./productivity.nix
     ./utils.nix
   ];
