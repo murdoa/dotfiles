@@ -10,6 +10,7 @@
     ./git.nix
     ./reverse.nix
     ./rust.nix
+    ./linux.nix
     ./python.nix
     ./tmux.nix
     ./vscode.nix
