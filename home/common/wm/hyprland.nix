@@ -55,7 +55,8 @@ in
         kb_layout = "gb";
         numlock_by_default = true;
 
-        follow_mouse = 1;
+        follow_mouse = 2;
+        mouse_refocus = false;
         float_switch_override_focus = 0;
 
         emulate_discrete_scroll = 0; # disable scroll emulation (messes with looking glass)
