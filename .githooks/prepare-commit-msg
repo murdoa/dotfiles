@@ -1,0 +1,286 @@
+#!/usr/bin/env bash
+#
+# Git prepare-commit-msg hook for AI-powered commit messages
+#
+# This hook will:
+# - Analyze your staged changes (opt-in only)
+# - Generate an AI-powered commit message
+# - Insert it as the default message (you can edit before saving)
+#
+# Configuration:
+#   git config hooks.prepareCommitMsg true/false   # Enable/disable
+#   git config hooks.commitProvider ollama/openai  # Set AI provider
+#   git config hooks.providerModel "model-name"    # Set model
+#   git config hooks.commitTemplate "format"       # Set template
+#   git config hooks.commitLanguage "en"           # Set language
+#
+# ⚠️  PRIVACY NOTICE:
+# This hook sends your staged changes to an AI provider (OpenAI by default).
+# Use --provider ollama for local processing without remote API calls.
+
+set -euo pipefail
+
+# Script arguments
+readonly COMMIT_MSG_FILE="$1"
+readonly COMMIT_SOURCE="${2:-}"
+readonly SHA1="${3:-}"
+
+# Configuration
+readonly GIT_DIR="${GIT_DIR:-.git}"
+readonly TEMP_MSG_FILE="${GIT_DIR}/.ai-commit-message.tmp"
+
+# Logging function for stderr
+log_info() {
+    echo "$*" >&2
+}
+
+# Get configuration values
+get_config() {
+    local key="$1"
+    local env_var="$2"
+    local default="$3"
+    
+    local value
+    value="${!env_var:-$(git config --get "hooks.${key}" 2>/dev/null || echo "")}"
+    echo "${value:-$default}"
+}
+
+# Check if prepare-commit-msg is enabled
+is_enabled() {
+    local enabled
+    enabled=$(git config --get --type=bool hooks.prepareCommitMsg 2>/dev/null || echo "false")
+    [[ "$enabled" == "true" ]]
+}
+
+# Handle pre-commit approved message
+handle_precommit_message() {
+    if [[ "$COMMIT_SOURCE" == "message" ]] && [[ -f "$TEMP_MSG_FILE" ]]; then
+        # User used -m but approved a better message in pre-commit
+        # Replace the -m message with the AI suggestion
+        local ai_message
+        ai_message=$(cat "$TEMP_MSG_FILE")
+        rm -f "$TEMP_MSG_FILE"
+        
+        # Override the original message with AI suggestion
+        # Note: Don't add comment lines as they won't be stripped with -m flag
+        echo "$ai_message" > "$COMMIT_MSG_FILE"
+        return 0
+    fi
+    return 1
+}
+
+# Skip processing for non-normal commits
+should_skip_processing() {
+    # Skip processing for any commit with a source (including -m flag)
+    if [[ -n "$COMMIT_SOURCE" ]]; then
+        # Clean up any temp message from pre-commit
+        rm -f "$TEMP_MSG_FILE"
+        return 0
+    fi
+    
+    return 1
+}
+
+# Add helpful hints to commit message
+add_helpful_hints() {
+    local temp_file="${COMMIT_MSG_FILE}.tmp"
+    
+    {
+        echo "# Tip: Enable AI commit messages with: git config hooks.prepareCommitMsg true"
+        echo "# Or use Ollama locally: git config hooks.commitProvider ollama"
+        echo "# ⚠️  Note: This will send staged changes to an AI provider"
+        echo ""
+        cat "$COMMIT_MSG_FILE"
+    } > "$temp_file"
+    
+    mv "$temp_file" "$COMMIT_MSG_FILE"
+}
+
+# Add API key reminder
+add_api_key_reminder() {
+    local temp_file="${COMMIT_MSG_FILE}.tmp"
+    
+    {
+        echo "# Tip: Set OPENAI_API_KEY to get AI-generated commit messages"
+        echo "# Or use Ollama: git config hooks.commitProvider ollama"
+        echo ""
+        cat "$COMMIT_MSG_FILE"
+    } > "$temp_file"
+    
+    mv "$temp_file" "$COMMIT_MSG_FILE"
+}
+
+# Validate provider configuration
+validate_provider_config() {
+    local provider="$1"
+    
+    case "$provider" in
+        "openai")
+            if [[ -z "${OPENAI_API_KEY:-}" ]]; then
+                add_api_key_reminder
+                return 1
+            fi
+            ;;
+        "ollama")
+            # Ollama doesn't require API key validation here
+            ;;
+        *)
+            echo "Unknown provider: $provider" >&2
+            return 1
+            ;;
+    esac
+    return 0
+}
+
+# Build command arguments securely
+build_commit_command() {
+    local provider="$1"
+    local model="$2"
+    local template="$3"
+    local language="$4"
+    local ollama_url="$5"
+    
+    local cmd_args=()
+    
+    # Determine the base command
+    if command -v git-rewrite-commits >/dev/null 2>&1; then
+        cmd_args+=("git-rewrite-commits")
+    else
+        cmd_args+=("npx" "git-rewrite-commits")
+    fi
+    
+    # Add basic flags
+    cmd_args+=("--staged" "--quiet" "--provider" "$provider" "--skip-remote-consent")
+    
+    # Add optional parameters
+    [[ -n "$model" ]] && cmd_args+=("--model" "$model")
+    [[ -n "$template" ]] && cmd_args+=("--template" "$template")
+    [[ -n "$language" ]] && cmd_args+=("--language" "$language")
+    [[ -n "$ollama_url" ]] && cmd_args+=("--ollama-url" "$ollama_url")
+    
+    printf '%s\0' "${cmd_args[@]}"
+}
+
+# Generate AI message using pre-commit temp file or fresh generation
+get_ai_message() {
+    local provider="$1"
+    local model="$2"
+    local template="$3"
+    local language="$4"
+    local ollama_url="$5"
+    
+    # Check if pre-commit already generated a message
+    if [[ -f "$TEMP_MSG_FILE" ]]; then
+        log_info "✨ Using AI message from pre-commit preview..."
+        cat "$TEMP_MSG_FILE"
+        rm -f "$TEMP_MSG_FILE"
+        return 0
+    fi
+    
+    # Generate AI-powered commit message
+    log_info "🤖 Generating AI-powered commit message..."
+    
+    # Build and execute command
+    local cmd_args
+    readarray -d $'\0' cmd_args < <(build_commit_command "$provider" "$model" "$template" "$language" "$ollama_url")
+    
+    # Generate the message using the tool with properly quoted arguments
+    "${cmd_args[@]}" 2>/dev/null || echo ""
+}
+
+# Create commit message with AI content
+create_commit_message() {
+    local ai_message="$1"
+    
+    if [[ -n "$ai_message" ]]; then
+        # Success! Use the AI-generated message
+        cat > "$COMMIT_MSG_FILE" << EOF
+$ai_message
+
+# ✨ AI-generated commit message above
+# Feel free to edit as needed before saving
+# 
+# Files being committed:
+$(git diff --cached --name-status | sed 's/^/# /')
+EOF
+    else
+        # Fallback if generation fails
+        local temp_file="${COMMIT_MSG_FILE}.tmp"
+        
+        cat > "$temp_file" << EOF
+# 💡 Tip: AI message generation failed. Writing your own message.
+# 
+# Consider using conventional commit format:
+#   feat: add new feature
+#   fix: fix a bug
+#   docs: documentation changes
+#   style: formatting changes
+#   refactor: code restructuring
+#   test: add or update tests
+#   chore: maintenance tasks
+#
+# Files being committed:
+$(git diff --cached --name-status | sed 's/^/# /')
+
+$(cat "$COMMIT_MSG_FILE")
+EOF
+        mv "$temp_file" "$COMMIT_MSG_FILE"
+    fi
+}
+
+# Process normal commits
+process_normal_commit() {
+    # Check if prepare-commit-msg is enabled (opt-in required)
+    if ! is_enabled; then
+        # Clean up any temp message from pre-commit
+        rm -f "$TEMP_MSG_FILE"
+        add_helpful_hints
+        return 0
+    fi
+    
+    # Get provider configuration
+    local provider model template language ollama_url
+    provider=$(get_config "commitProvider" "GIT_COMMIT_PROVIDER" "openai")
+    model=$(get_config "providerModel" "GIT_COMMIT_MODEL" "")
+    template=$(get_config "commitTemplate" "GIT_COMMIT_TEMPLATE" "")
+    language=$(get_config "commitLanguage" "GIT_COMMIT_LANGUAGE" "en")
+    ollama_url=$(get_config "ollamaUrl" "OLLAMA_URL" "")
+    
+    # Validate provider configuration
+    if ! validate_provider_config "$provider"; then
+        return 0
+    fi
+    
+    # Check if there are staged changes
+    if git diff --cached --quiet; then
+        return 0
+    fi
+    
+    # Generate or retrieve AI message
+    local ai_message
+    ai_message=$(get_ai_message "$provider" "$model" "$template" "$language" "$ollama_url")
+    
+    # Create the commit message
+    create_commit_message "$ai_message"
+}
+
+# Main execution
+main() {
+    # Skip processing for non-normal commits first
+    if should_skip_processing; then
+        exit 0
+    fi
+    
+    # Only process for normal commits without -m flag
+    if [[ -z "$COMMIT_SOURCE" ]]; then
+        # Handle pre-commit approved message for normal commits
+        if handle_precommit_message; then
+            exit 0
+        fi
+        
+        process_normal_commit
+    fi
+}
+
+# Run main function
+main "$@"

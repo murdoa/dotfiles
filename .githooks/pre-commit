@@ -1,0 +1,99 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# Configuration
+readonly SCRIPT_NAME="$(basename "$0")"
+readonly GIT_DIR="${GIT_DIR:-.git}"
+readonly TEMP_MSG_FILE="${GIT_DIR}/.ai-commit-message.tmp"
+
+# Colors for output
+readonly RED='\033[0;31m'
+readonly GREEN='\033[0;32m'
+readonly YELLOW='\033[1;33m'
+readonly BLUE='\033[0;34m'
+readonly CYAN='\033[0;36m'
+readonly NC='\033[0m' # No Color
+
+# Logging functions
+log_info() {
+    printf "${CYAN}%s${NC}\n" "$*"
+}
+
+log_success() {
+    printf "${GREEN}%s${NC}\n" "$*"
+}
+
+log_warning() {
+    printf "${YELLOW}%s${NC}\n" "$*"
+}
+
+log_error() {
+    printf "${RED}%s${NC}\n" "$*" >&2
+}
+
+# Check if preview is enabled (opt-in required for security)
+is_preview_enabled() {
+    local enabled
+    enabled=$(git config --get --type=bool hooks.preCommitPreview 2>/dev/null || echo "false")
+    [[ "$enabled" == "true" ]]
+}
+
+# Get configuration values
+get_config() {
+    local key="$1"
+    local env_var="$2"
+    local default="$3"
+    
+    local value
+    value="${!env_var:-$(git config --get "hooks.${key}" 2>/dev/null || echo "")}"
+    echo "${value:-$default}"
+}
+
+# Format repository with treefmt
+format_repository() {
+    log_info "🔧 Running treefmt on repo..."
+    
+    if treefmt 2>&1; then
+        # Add any files that were modified by treefmt
+        git add . >/dev/null 2>&1 || true
+        log_success "Repository formatted successfully"
+    else
+        log_error "treefmt failed! Check output above."
+        log_warning "Continuing with commit anyway..."
+        return 1
+    fi
+    echo
+}
+
+# Check if required tools are available
+check_dependencies() {
+    if ! command -v treefmt >/dev/null 2>&1; then
+        log_warning "treefmt not found, skipping formatting"
+        return 1
+    fi
+    return 0
+}
+
+
+
+# Main execution
+main() {
+    # Exit silently if not enabled (opt-in for security)
+    if ! is_preview_enabled; then
+        exit 0
+    fi
+    
+    # Format repository if treefmt is available
+    if check_dependencies; then
+        format_repository || true
+    fi
+    
+    # Check for staged changes
+    if git diff --cached --quiet; then
+        log_warning "No staged changes found."
+        exit 0
+    fi
+}
+
+# Run main function
+main "$@"
