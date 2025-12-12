@@ -153,6 +153,7 @@
     loadModels = [
       "gemma3:270m"
       "gemma3:1b"
+      "llama3.2:1b"
     ];
   };
 }
