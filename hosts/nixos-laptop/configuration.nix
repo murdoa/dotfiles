@@ -148,4 +148,11 @@
   programs.zsh.enable = true;
 
   services.thermald.enable = true;
+
+  services.ollama = {
+    loadModels = [
+      "gemma3:270m"
+      "gemma3:1b"
+    ];
+  };
 }
