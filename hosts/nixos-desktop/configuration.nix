@@ -158,9 +158,10 @@
   services.ollama = {
     acceleration = "cuda";
     loadModels = [
-      "gemma3:4b"
-      "gemma3:1b"
+      "codellama:7b"
       "gemma3:270m"
+      "gemma3:1b"
+      "gemma3:4b"
     ];
   };
 
