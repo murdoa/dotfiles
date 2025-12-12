@@ -80,6 +80,7 @@ check_dependencies() {
 main() {
     # Exit silently if not enabled (opt-in for security)
     if ! is_preview_enabled; then
+	echo "git config hooks.preCommitPreview not set pre-commit hook not running"
         exit 0
     fi
     
