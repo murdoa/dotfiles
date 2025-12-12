@@ -71,6 +71,13 @@ in
         microhobby.linuxkerneldev
       ]
       ++ common-extensions;
+
+    profiles.web.extensions =
+      with vscode-marketplace;
+      [
+        ritwickdey.liveserver
+      ]
+      ++ common-extensions;
   };
 
   xdg.desktopEntries = builtins.listToAttrs (
