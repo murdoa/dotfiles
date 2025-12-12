@@ -7,6 +7,7 @@
 
   home.packages = [
     pkgs.git
+    pkgs.lazygit
   ];
 
   programs.git = {
