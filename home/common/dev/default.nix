@@ -6,12 +6,12 @@
 {
   imports = [
     ./ai.nix
-    ./formatting.nix
     ./git.nix
     ./reverse.nix
     ./rust.nix
     ./linux.nix
     ./python.nix
+    ./tooling.nix
     ./tmux.nix
     ./vscode.nix
     ./cc.nix
