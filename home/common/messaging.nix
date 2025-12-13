@@ -6,7 +6,7 @@
 {
 
   home.packages = [
-    pkgs.cinny-desktop
+    # pkgs.cinny-desktop -- broken
     pkgs.zoom-us
   ];
 

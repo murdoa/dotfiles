@@ -13,7 +13,11 @@
   programs.git = {
     enable = true;
     lfs.enable = true;
-    userName = "murdoa";
-    userEmail = "murdoa@protonmail.com";
+    settings = {
+      user = {
+        name = "murdoa";
+        email = "murdoa@protonmail.com";
+      };
+    };
   };
 }

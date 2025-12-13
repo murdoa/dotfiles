@@ -12,7 +12,7 @@
     pkg-config
     gdb
     valgrind
-    (hiPrio clang)
+    (lib.hiPrio clang)
     clang-tools
     cppcheck
   ];

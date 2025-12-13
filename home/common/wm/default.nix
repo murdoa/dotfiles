@@ -20,7 +20,7 @@
     liberation_ttf
     nerd-fonts.droid-sans-mono
     noto-fonts
-    noto-fonts-emoji
+    noto-fonts-color-emoji
     proggyfonts
   ];
 
