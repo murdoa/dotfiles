@@ -63,7 +63,6 @@ in
 
       qemu = {
         package = pkgs.qemu_kvm;
-        ovmf.enable = true;
       };
     };
   };
