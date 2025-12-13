@@ -2,10 +2,10 @@
   description = "NixOS configuration flake for dev machines";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
     home-manager = {
       # Follow corresponding `release` branch from Home Manager
-      url = "github:nix-community/home-manager/release-25.05";
+      url = "github:nix-community/home-manager/release-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     elephant.url = "github:abenz1267/elephant";

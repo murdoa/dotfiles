@@ -16,6 +16,7 @@
     ./music.nix
     ./shell.nix
     ./services.nix
+    ./storage.nix
     ./productivity.nix
     ./utils.nix
   ];
