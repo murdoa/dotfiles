@@ -70,9 +70,9 @@ in
         };
       };
 
-      gestures = {
-        workspace_swipe = true;
-      };
+      #gestures = {
+      #  workspace_swipe = true;
+      #};
 
       general = {
         gaps_in = 5;
