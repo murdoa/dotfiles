@@ -202,6 +202,15 @@ in
           "browser.download.dir" = "/home/aodhan/Documents/Senergy/Downloads";
         };
       };
+      caddai = {
+        id = 2;
+        name = "caddai";
+        isDefault = false;
+        search = commonSearch;
+        bookmarks = commonBookmarks;
+        extensions.packages = commonExtensions;
+        settings = commonSettings;
+      };
     };
   };
 
