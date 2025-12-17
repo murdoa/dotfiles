@@ -75,10 +75,8 @@ in
     profiles.web.extensions =
       with vscode-marketplace;
       [
-
         yoavbls.pretty-ts-errors
         ms-vscode.vscode-typescript-next
-        wallabyjs.console-ninja
         ritwickdey.liveserver
       ]
       ++ common-extensions;
