@@ -7,6 +7,7 @@
 
   home.packages = with pkgs; [
     inkscape-with-extensions
+    gimp
   ];
 
 }
