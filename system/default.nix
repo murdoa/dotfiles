@@ -2,12 +2,15 @@
   lib,
   pkgs,
   mainUser,
+  ssh-keys,
   ...
 }:
 {
   imports = [
     ./graphics.nix
   ];
+
+  users.users.${mainUser}.openssh.authorizedKeys.keyFiles = [ ssh-keys.outPath ];
 
   environment.systemPackages = with pkgs; [
     screen

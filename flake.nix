@@ -26,6 +26,11 @@
     };
 
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
+
+    ssh-keys = {
+      url = "https://github.com/murdoa.keys";
+      flake = false;
+    };
   };
 
   outputs =
@@ -34,6 +39,7 @@
       nixpkgs,
       home-manager,
       nixos-hardware,
+      ssh-keys,
       ...
     }@inputs:
     let
@@ -62,7 +68,7 @@
             ./hosts/nixos-desktop/configuration.nix
           ];
           specialArgs = {
-            inherit mainUser;
+            inherit mainUser ssh-keys;
           };
         };
         nixos-laptop = nixpkgs.lib.nixosSystem {
@@ -72,7 +78,7 @@
             nixos-hardware.nixosModules.dell-latitude-7390
           ];
           specialArgs = {
-            inherit mainUser;
+            inherit mainUser ssh-keys;
           };
         };
       };
