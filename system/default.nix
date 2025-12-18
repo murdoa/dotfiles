@@ -10,8 +10,6 @@
     ./graphics.nix
   ];
 
-  users.users.${mainUser}.openssh.authorizedKeys.keyFiles = [ ssh-keys.outPath ];
-
   environment.systemPackages = with pkgs; [
     screen
     usbutils
@@ -42,5 +40,9 @@
       setSocketVariable = true;
     };
   };
-  users.users.${mainUser}.extraGroups = [ "docker" ];
+
+  users.users.${mainUser} = {
+    openssh.authorizedKeys.keyFiles = [ ssh-keys.outPath ];
+    extraGroups = [ "docker" ];
+  };
 }
