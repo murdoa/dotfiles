@@ -45,4 +45,6 @@
     openssh.authorizedKeys.keyFiles = [ ssh-keys.outPath ];
     extraGroups = [ "docker" ];
   };
+  networking.firewall.allowedTCPPorts = [ 22 ];
+  services.openssh.enable = true;
 }
