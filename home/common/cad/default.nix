@@ -5,6 +5,7 @@
 }:
 {
   imports = [
+    ./3d-printing.nix
     ./simulation.nix
   ];
 

@@ -50,6 +50,7 @@
         (final: prev: {
           grec = final.callPackage ./pkgs/grec.nix { };
         })
+        (import ./home/overlays/bambu.nix)
       ];
       pkgs = import nixpkgs {
         inherit system;

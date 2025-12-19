@@ -154,7 +154,20 @@
         "nix-vscode-extensions": "nix-vscode-extensions",
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs_2",
+        "ssh-keys": "ssh-keys",
         "walker": "walker"
+      }
+    },
+    "ssh-keys": {
+      "flake": false,
+      "locked": {
+        "narHash": "sha256-gr3FELSbADn2bHP5oj1wPftHXVM26NS43eUkt7xjlj0=",
+        "type": "file",
+        "url": "https://github.com/murdoa.keys"
+      },
+      "original": {
+        "type": "file",
+        "url": "https://github.com/murdoa.keys"
       }
     },
     "systems": {
