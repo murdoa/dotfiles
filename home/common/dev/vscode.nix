@@ -42,6 +42,7 @@ in
         ms-python.vscode-python-envs
         ms-toolsai.jupyter
         ms-toolsai.jupyter-keymap
+        kevinrose.vsc-python-indent
       ]
       ++ common-extensions;
 
