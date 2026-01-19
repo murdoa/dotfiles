@@ -253,6 +253,7 @@ in
         "$mainMod SHIFT, Print, exec, ${wfrecorderBin} -g \"$(slurp)\" -f $(${xdg-user-dirBin} VIDEOS)/$(TZ=utc date +'recording_%Y-%m-%d-%H%M%S.%3N.mp4')"
         "$mainMod ALT, Print, exec, ${wfrecorderBin} --audio -f $(${xdg-user-dirBin} VIDEOS)/$(TZ=utc date +'recording_%Y-%m-%d-%H%M%S.%3N.mp4')"
         "$mainMod SHIFT ALT, Print, exec, ${wfrecorderBin} --audio -g \"$(slurp)\" -f $(${xdg-user-dirBin} VIDEOS)/$(TZ=utc date +'recording_%Y-%m-%d-%H%M%S.%3N.mp4')"
+        "$mainMod CTRL, Print, exec, pkill -SIGINT wf-recorder"
       ];
 
       bindm = [
