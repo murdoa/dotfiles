@@ -7,7 +7,7 @@
 with lib;
 let
   cfg = config.hardware.nvidia;
-  nvidiaPackage = config.boot.kernelPackages.nvidiaPackages.latest;
+  nvidiaPackage = config.boot.kernelPackages.nvidiaPackages.stable;
 in
 {
   options.hardware.nvidia = {
@@ -15,6 +15,9 @@ in
   };
 
   config = mkIf cfg.enable {
+
+    boot.kernelParams = [ "nvidia_drm.fbdev=0" ];
+
     nixpkgs.config.nvidia.acceptLicense = true;
 
     services.xserver.videoDrivers = [ "nvidia" ];
