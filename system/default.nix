@@ -1,4 +1,5 @@
 {
+  config,
   lib,
   pkgs,
   mainUser,
@@ -47,4 +48,37 @@
   };
   networking.firewall.allowedTCPPorts = [ 22 ];
   services.openssh.enable = true;
+
+  programs.ccache.enable = true;
+  programs.ccache.cacheDir = "/nix/var/cache/ccache";
+  nix.settings.extra-sandbox-paths = [ config.programs.ccache.cacheDir ];
+
+  nix.settings.trusted-users = [ "@wheel" ];
+
+  nix.distributedBuilds = true;
+  nix.buildMachines = [
+    {
+      hostName = "build.solarpi.ie";
+      sshUser = "builder";
+      protocol = "ssh-ng";
+
+      systems = [ "aarch64-linux" ];
+
+      maxJobs = 4;
+      speedFactor = 2;
+
+      supportedFeatures = [
+        "big-parallel"
+        "kvm"
+        "nixos-test"
+      ];
+    }
+  ];
+ # programs.ssh.extraConfig = ''
+ #   Host build.solarpi.ie
+ #     User builder
+ #     ControlMaster auto
+ #     ControlPersist 10m
+ #     ControlPath /run/ssh-control/%r@%h:%p
+ # '';
 }
