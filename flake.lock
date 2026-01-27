@@ -132,6 +132,22 @@
     },
     "nixpkgs_3": {
       "locked": {
+        "lastModified": 1768569498,
+        "narHash": "sha256-bB6Nt99Cj8Nu5nIUq0GLmpiErIT5KFshMQJGMZwgqUo=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "be5afa0fcb31f0a96bf9ecba05a516c66fcd8114",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixpkgs-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs_4": {
+      "locked": {
         "lastModified": 1757068644,
         "narHash": "sha256-NOrUtIhTkIIumj1E/Rsv1J37Yi3xGStISEo8tZm3KW4=",
         "owner": "NixOS",
@@ -146,6 +162,24 @@
         "type": "github"
       }
     },
+    "opencode": {
+      "inputs": {
+        "nixpkgs": "nixpkgs_3"
+      },
+      "locked": {
+        "lastModified": 1768953653,
+        "narHash": "sha256-MyIDTbBnP13Wc0E81T8d+2+7PtKGeBpIYTsqQyERGqA=",
+        "owner": "anomalyco",
+        "repo": "opencode",
+        "rev": "20c8624bb7bca9cb0c83390453ad6217f11d06b6",
+        "type": "github"
+      },
+      "original": {
+        "owner": "anomalyco",
+        "repo": "opencode",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "elephant": "elephant",
@@ -154,6 +188,7 @@
         "nix-vscode-extensions": "nix-vscode-extensions",
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs_2",
+        "opencode": "opencode",
         "ssh-keys": "ssh-keys",
         "walker": "walker"
       }
@@ -205,7 +240,7 @@
         "elephant": [
           "elephant"
         ],
-        "nixpkgs": "nixpkgs_3",
+        "nixpkgs": "nixpkgs_4",
         "systems": "systems_2"
       },
       "locked": {

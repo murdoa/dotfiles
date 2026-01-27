@@ -6,6 +6,7 @@
   config,
   pkgs,
   mainUser,
+  lib,
   ...
 }:
 
@@ -158,6 +159,7 @@
   programs.zsh.enable = true;
 
   services.ollama = {
+    package = lib.mkForce (pkgs.ollama.override { config.cudaSupport = true; config.rocmSupport = false; });
     acceleration = "cuda";
     loadModels = [
       "codellama:7b"
