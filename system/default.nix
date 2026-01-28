@@ -8,6 +8,7 @@
 {
   imports = [
     ./graphics.nix
+    ./services.nix
   ];
 
   networking.nameservers = [
