@@ -17,6 +17,7 @@ in
     wf-recorder
     slurp
     xdg-user-dirs
+    wayvnc
   ];
   wayland.windowManager.hyprland = {
     enable = true;
@@ -36,11 +37,14 @@ in
       "$fileManager" = fileManager;
       "$menu" = menu;
 
-      monitor = ",preferred,auto,auto";
+      monitor = [
+        "DP-1,1920x1080@60,0x0,1"
+      ];
 
       exec-once = [
         "elephant"
         "waybar"
+        "wayvnc"
       ];
 
       env = [
