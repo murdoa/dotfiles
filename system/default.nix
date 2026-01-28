@@ -60,7 +60,7 @@
       "wireshark"
     ];
   };
-  networking.firewall.allowedTCPPorts = [ 22 ];
+  networking.firewall.allowedTCPPorts = [ 22 5900 ];
   services.openssh.enable = true;
 
   programs.ccache.enable = true;
@@ -88,6 +88,7 @@
       ];
     }
   ];
+  services.fail2ban.enable = true;
  # programs.ssh.extraConfig = ''
  #   Host build.solarpi.ie
  #     User builder
