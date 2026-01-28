@@ -17,6 +17,7 @@ in
     wf-recorder
     slurp
     xdg-user-dirs
+    wayvnc
   ];
   wayland.windowManager.hyprland = {
     enable = true;
@@ -36,11 +37,14 @@ in
       "$fileManager" = fileManager;
       "$menu" = menu;
 
-      monitor = ",preferred,auto,auto";
+      monitor = [
+        "DP-1,1920x1080@60,0x0,1"
+      ];
 
       exec-once = [
         "elephant"
         "waybar"
+        "wayvnc"
       ];
 
       env = [
@@ -253,6 +257,7 @@ in
         "$mainMod SHIFT, Print, exec, ${wfrecorderBin} -g \"$(slurp)\" -f $(${xdg-user-dirBin} VIDEOS)/$(TZ=utc date +'recording_%Y-%m-%d-%H%M%S.%3N.mp4')"
         "$mainMod ALT, Print, exec, ${wfrecorderBin} --audio -f $(${xdg-user-dirBin} VIDEOS)/$(TZ=utc date +'recording_%Y-%m-%d-%H%M%S.%3N.mp4')"
         "$mainMod SHIFT ALT, Print, exec, ${wfrecorderBin} --audio -g \"$(slurp)\" -f $(${xdg-user-dirBin} VIDEOS)/$(TZ=utc date +'recording_%Y-%m-%d-%H%M%S.%3N.mp4')"
+        "$mainMod CTRL, Print, exec, pkill -SIGINT wf-recorder"
       ];
 
       bindm = [

@@ -81,6 +81,14 @@ in
         ritwickdey.liveserver
       ]
       ++ common-extensions;
+
+    profiles.flutter.extensions =
+      with vscode-marketplace;
+      [
+        dart-code.flutter
+      ]
+      ++ common-extensions;
+
   };
 
   xdg.desktopEntries = builtins.listToAttrs (

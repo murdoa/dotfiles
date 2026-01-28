@@ -31,6 +31,11 @@
       url = "https://github.com/murdoa.keys";
       flake = false;
     };
+
+    opencode = {
+      url = "github:anomalyco/opencode";
+      # inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -40,6 +45,7 @@
       home-manager,
       nixos-hardware,
       ssh-keys,
+      opencode,
       ...
     }@inputs:
     let
@@ -48,8 +54,13 @@
       mainUser = "aodhan";
       overlays = [
         (final: prev: {
+          opencode = opencode.packages.${system}.opencode;
+        })
+        (final: prev: {
           grec = final.callPackage ./pkgs/grec.nix { };
         })
+        (import ./overlays/bambu.nix)
+        (import ./overlays/ollama.nix)
       ];
       pkgs = import nixpkgs {
         inherit system;
@@ -66,6 +77,9 @@
           inherit system;
           modules = [
             ./hosts/nixos-desktop/configuration.nix
+            {
+              nixpkgs.overlays = overlays;
+            }
           ];
           specialArgs = {
             inherit mainUser ssh-keys;
@@ -76,6 +90,9 @@
           modules = [
             ./hosts/nixos-laptop/configuration.nix
             nixos-hardware.nixosModules.dell-latitude-7390
+            {
+              nixpkgs.overlays = overlays;
+            }
           ];
           specialArgs = {
             inherit mainUser ssh-keys;
