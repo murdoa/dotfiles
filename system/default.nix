@@ -61,7 +61,10 @@
       "wireshark"
     ];
   };
-  networking.firewall.allowedTCPPorts = [ 22 5900 ];
+  networking.firewall.allowedTCPPorts = [
+    22
+    5900
+  ];
   services.openssh.enable = true;
 
   programs.ccache.enable = true;
@@ -90,11 +93,11 @@
     }
   ];
   services.fail2ban.enable = true;
- # programs.ssh.extraConfig = ''
- #   Host build.solarpi.ie
- #     User builder
- #     ControlMaster auto
- #     ControlPersist 10m
- #     ControlPath /run/ssh-control/%r@%h:%p
- # '';
+  # programs.ssh.extraConfig = ''
+  #   Host build.solarpi.ie
+  #     User builder
+  #     ControlMaster auto
+  #     ControlPersist 10m
+  #     ControlPath /run/ssh-control/%r@%h:%p
+  # '';
 }

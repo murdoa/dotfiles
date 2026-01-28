@@ -1,6 +1,6 @@
 final: prev: {
   ollama = prev.ollama.overrideAttrs (old: rec {
-    version = "0.14.3-rc2"; 
+    version = "0.14.3-rc2";
     src = prev.fetchFromGitHub {
       owner = "ollama";
       repo = "ollama";
