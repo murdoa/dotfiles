@@ -62,10 +62,17 @@
     ];
   };
   networking.firewall.allowedTCPPorts = [
-    22
-    5900
+    22 # SSH
+    5900 # VNC
   ];
-  services.openssh.enable = true;
+
+  services.openssh = {
+    enable = true;
+    settings = {
+      PasswordAuthentication = false;
+      PermitRootLogin = "no";
+    };
+  };
 
   programs.ccache.enable = true;
   programs.ccache.cacheDir = "/nix/var/cache/ccache";
