@@ -60,7 +60,6 @@
           grec = final.callPackage ./pkgs/grec.nix { };
         })
         (import ./overlays/bambu.nix)
-        (import ./overlays/ollama.nix)
       ];
       pkgs = import nixpkgs {
         inherit system;
@@ -78,7 +77,9 @@
           modules = [
             ./hosts/nixos-desktop/configuration.nix
             {
-              nixpkgs.overlays = overlays;
+              nixpkgs.overlays = overlays ++ [
+                (import ./overlays/ollama.nix)
+              ];
             }
           ];
           specialArgs = {
